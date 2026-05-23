@@ -31,4 +31,4 @@ First public prototype release.
 - No sound. The game is silent.
 - No in-game tutorial beyond the legend dialog.
 - Binaries are **unsigned** — first launch will trigger SmartScreen (Windows) or Gatekeeper (macOS) warnings. See [README.md](README.md#first-launch-warnings) for the bypass.
-- macOS arm64 and Intel ship as separate downloads (pygame wheels aren't universal2).
+- **macOS Intel is not attached to this release.** The build pipeline still attempts an Intel build (best-effort), but the `macos-13` runner queue on free-tier GitHub Actions is too slow to gate every release on. Intel artifacts live on the workflow run's Artifacts list and may be attached in a future release.

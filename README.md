@@ -21,8 +21,9 @@ Grab the latest build for your OS from the [Releases page](../../releases) — n
 |---|---|---|
 | **Windows (x64)** | `defrag-windows-x64.zip` | Unzip, double-click `DEFRAG.EXE.exe`. |
 | **macOS — Apple Silicon (M1/M2/M3)** | `defrag-macos-arm64.zip` | Unzip, double-click `DEFRAG.app`. |
-| **macOS — Intel** | `defrag-macos-intel.zip` | Unzip, double-click `DEFRAG.app`. |
 | **Linux (x64)** | `defrag-linux-x64.tar.gz` | Extract, `chmod +x defrag-linux-x64`, then run. SDL2 must be installed (`libsdl2-2.0-0`, `libsdl2-ttf-2.0-0` on Debian/Ubuntu). |
+
+> Intel Macs aren't supported in the current release. The build pipeline still attempts to produce an Intel binary as a best-effort artifact (downloadable from the Actions tab), but it isn't bundled with the release.
 
 ### First-launch warnings
 

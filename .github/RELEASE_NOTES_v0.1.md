@@ -8,10 +8,11 @@ A single-file pygame defrag-themed clicker / idler, styled like Microsoft (sorry
 |---|---|
 | Windows x64 | [`defrag-windows-x64.zip`](https://github.com/jtwolfe/defrag.exe/releases/download/v0.1/defrag-windows-x64.zip) |
 | macOS — Apple Silicon (M1/M2/M3) | [`defrag-macos-arm64.zip`](https://github.com/jtwolfe/defrag.exe/releases/download/v0.1/defrag-macos-arm64.zip) |
-| macOS — Intel | [`defrag-macos-intel.zip`](https://github.com/jtwolfe/defrag.exe/releases/download/v0.1/defrag-macos-intel.zip) |
 | Linux x64 | [`defrag-linux-x64.tar.gz`](https://github.com/jtwolfe/defrag.exe/releases/download/v0.1/defrag-linux-x64.tar.gz) |
 
 No install — unzip / untar and run.
+
+> macOS Intel build is not attached to v0.1. The build pipeline still builds it (best-effort) but it isn't gating the release; it will be attached in a future release if there's demand.
 
 ## First-launch warnings
 
