@@ -1,0 +1,112 @@
+name: Build release binaries
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Build only — do not create a Release even on tag push'
+        required: false
+        default: 'true'
+
+jobs:
+  build:
+    name: Build (${{ matrix.target }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-22.04
+            target: linux-x64
+            artifact: defrag-linux-x64.tar.gz
+            python: '3.12'
+          - os: windows-latest
+            target: windows-x64
+            artifact: defrag-windows-x64.zip
+            python: '3.12'
+          - os: macos-14
+            target: macos-universal
+            artifact: defrag-macos.zip
+            python: '3.12'
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Install build deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install pygame pyinstaller
+
+      - name: Install Linux SDL2 (runtime libs)
+        if: matrix.target == 'linux-x64'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libsdl2-2.0-0 libsdl2-ttf-2.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0
+
+      - name: Build with PyInstaller
+        run: pyinstaller defrag.spec --clean --noconfirm
+
+      - name: Package — Linux
+        if: matrix.target == 'linux-x64'
+        run: |
+          cd dist
+          tar -czf defrag-linux-x64.tar.gz defrag-linux-x64
+          ls -la
+
+      - name: Package — Windows
+        if: matrix.target == 'windows-x64'
+        shell: pwsh
+        run: |
+          cd dist
+          Compress-Archive -Path 'DEFRAG.EXE.exe' -DestinationPath 'defrag-windows-x64.zip'
+          Get-ChildItem
+
+      - name: Package — macOS
+        if: matrix.target == 'macos-universal'
+        run: |
+          cd dist
+          zip -r defrag-macos.zip DEFRAG.app
+          ls -la
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/${{ matrix.artifact }}
+          if-no-files-found: error
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+    # Only auto-release on real tag pushes (not workflow_dispatch dry-runs).
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Stage release files
+        run: |
+          mkdir -p release
+          find artifacts -type f \( -name '*.tar.gz' -o -name '*.zip' \) -exec cp {} release/ \;
+          ls -la release/
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release/*
+          generate_release_notes: true
+          fail_on_unmatched_files: true

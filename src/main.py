@@ -895,7 +895,14 @@ gs = GameState()
 # ============================================================================
 
 def save_dir() -> Path:
-    base = Path(os.environ.get('XDG_DATA_HOME', Path.home() / '.local' / 'share'))
+    # Pick the right per-OS app-data location. On Linux this is the existing
+    # XDG path, so saves made by earlier builds keep loading.
+    if sys.platform == 'win32':
+        base = Path(os.environ.get('APPDATA') or Path.home())
+    elif sys.platform == 'darwin':
+        base = Path.home() / 'Library' / 'Application Support'
+    else:
+        base = Path(os.environ.get('XDG_DATA_HOME') or (Path.home() / '.local' / 'share'))
     p = base / 'defrag.exe' / 'saves'
     p.mkdir(parents=True, exist_ok=True)
     return p

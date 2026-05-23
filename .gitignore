@@ -24,6 +24,8 @@ build/
 dist/
 *.egg-info/
 *.spec
+# but the project's own PyInstaller spec IS source — keep it.
+!defrag.spec
 
 # OS junk
 .DS_Store
