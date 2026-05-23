@@ -76,8 +76,8 @@ if sys.platform == 'darwin':
         info_plist={
             'NSHighResolutionCapable': 'True',
             'CFBundleDisplayName': 'DEFRAG.EXE',
-            'CFBundleShortVersionString': '0.1.0',
-            'CFBundleVersion': '0.1.0',
+            'CFBundleShortVersionString': '0.1',
+            'CFBundleVersion': '0.1',
             'NSHumanReadableCopyright': 'Free for personal use.',
         },
     )

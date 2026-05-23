@@ -55,7 +55,7 @@ The spec is cross-platform; the same file builds Linux / Windows / macOS dependi
 
 1. Bump `CFBundleShortVersionString` and `CFBundleVersion` in `defrag.spec` (macOS).
 2. Commit and push.
-3. Tag: `git tag v0.1.0 && git push --tags`.
+3. Tag: `git tag v0.1 && git push --tags`.
 4. The `release.yml` workflow builds for all three OSes and publishes a GitHub Release with all three artifacts attached.
 
 To dry-run the workflow without cutting a release, use the **Run workflow** button on the Actions tab (uses `workflow_dispatch`).
