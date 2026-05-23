@@ -78,6 +78,6 @@ if sys.platform == 'darwin':
             'CFBundleDisplayName': 'DEFRAG.EXE',
             'CFBundleShortVersionString': '0.1',
             'CFBundleVersion': '0.1',
-            'NSHumanReadableCopyright': 'Free for personal use.',
+            'NSHumanReadableCopyright': 'Copyright (c) 2026 Jim (jtwolfe). Licensed under PolyForm Noncommercial 1.0.0.',
         },
     )

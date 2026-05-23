@@ -1,5 +1,10 @@
 # DEFRAG.EXE
 
+[![Tests](https://github.com/jtwolfe/defrag.exe/actions/workflows/test.yml/badge.svg)](https://github.com/jtwolfe/defrag.exe/actions/workflows/test.yml)
+[![Build release binaries](https://github.com/jtwolfe/defrag.exe/actions/workflows/release.yml/badge.svg)](https://github.com/jtwolfe/defrag.exe/actions/workflows/release.yml)
+[![Latest release](https://img.shields.io/github/v/release/jtwolfe/defrag.exe?include_prereleases&sort=semver)](https://github.com/jtwolfe/defrag.exe/releases)
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/license-PolyForm%20NC%201.0-blue)](LICENSE)
+
 A Win9x-styled defrag-themed clicker / idler.
 
 You are a sysadmin in 1995. The drive needs defragmenting. So does the next one. So do all twenty-four after that. Buy upgrades, automate the boring parts, prestige when the disks get cruel, and watch the little coloured blocks march into place.
@@ -80,6 +85,14 @@ pyinstaller defrag.spec --clean --noconfirm
 
 This is a **prototype**. The systems are all working, the math is balanced, but the polish is not what it would be in a v1.0 — no sound, no in-game help beyond the legend dialog, no animations beyond the grid. If you enjoy it anyway, that's lovely.
 
+## License
+
+This project is licensed under the **[PolyForm Noncommercial License 1.0.0](LICENSE)**.
+
+In plain English: you may download it, play it, study the source, modify it, and share modifications — all for **noncommercial** purposes. Commercial use, distribution, or resale is reserved to the copyright holder. If you want to do something commercial with it, get in touch.
+
 ## Credits
 
 Created by Jim. Built with [pygame](https://www.pygame.org/). Inspired by the Microsoft (sorry, **M1CROSOFT**) defrag screen that an entire generation watched motionlessly for hours.
+
+Copyright © 2026 Jim (jtwolfe). All rights reserved.
