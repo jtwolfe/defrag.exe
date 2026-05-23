@@ -26,9 +26,13 @@ jobs:
             target: windows-x64
             artifact: defrag-windows-x64.zip
             python: '3.12'
+          - os: macos-13
+            target: macos-intel
+            artifact: defrag-macos-intel.zip
+            python: '3.12'
           - os: macos-14
-            target: macos-universal
-            artifact: defrag-macos.zip
+            target: macos-arm64
+            artifact: defrag-macos-arm64.zip
             python: '3.12'
     runs-on: ${{ matrix.os }}
     steps:
@@ -68,11 +72,18 @@ jobs:
           Compress-Archive -Path 'DEFRAG.EXE.exe' -DestinationPath 'defrag-windows-x64.zip'
           Get-ChildItem
 
-      - name: Package — macOS
-        if: matrix.target == 'macos-universal'
+      - name: Package — macOS Intel
+        if: matrix.target == 'macos-intel'
         run: |
           cd dist
-          zip -r defrag-macos.zip DEFRAG.app
+          zip -r defrag-macos-intel.zip DEFRAG.app
+          ls -la
+
+      - name: Package — macOS ARM64
+        if: matrix.target == 'macos-arm64'
+        run: |
+          cd dist
+          zip -r defrag-macos-arm64.zip DEFRAG.app
           ls -la
 
       - name: Upload artifact

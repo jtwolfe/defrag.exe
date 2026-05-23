@@ -15,7 +15,8 @@ Grab the latest build for your OS from the [Releases page](../../releases) — n
 | OS | File | How to launch |
 |---|---|---|
 | **Windows (x64)** | `defrag-windows-x64.zip` | Unzip, double-click `DEFRAG.EXE.exe`. |
-| **macOS (Universal — Intel + Apple Silicon)** | `defrag-macos.zip` | Unzip, double-click `DEFRAG.app`. |
+| **macOS — Apple Silicon (M1/M2/M3)** | `defrag-macos-arm64.zip` | Unzip, double-click `DEFRAG.app`. |
+| **macOS — Intel** | `defrag-macos-intel.zip` | Unzip, double-click `DEFRAG.app`. |
 | **Linux (x64)** | `defrag-linux-x64.tar.gz` | Extract, `chmod +x defrag-linux-x64`, then run. SDL2 must be installed (`libsdl2-2.0-0`, `libsdl2-ttf-2.0-0` on Debian/Ubuntu). |
 
 ### First-launch warnings

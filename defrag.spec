@@ -59,7 +59,8 @@ exe = EXE(
     runtime_tmpdir=None,
     console=False,         # no terminal window on Windows
     disable_windowed_traceback=False,
-    target_arch='universal2' if sys.platform == 'darwin' else None,
+    target_arch=None,    # use host arch — pygame wheels aren't universal2,
+                         # so we build per-arch on macos-13 (Intel) and macos-14 (ARM)
     codesign_identity=None,
     entitlements_file=None,
     icon=icon_path,

@@ -50,12 +50,13 @@ GitHub Actions matrix with three runners:
 | OS runner | Output artifact | Save dir at runtime |
 |-----------|-----------------|----------------------|
 | `windows-latest` (x64) | `defrag-windows-x64.zip` containing `DEFRAG.EXE.exe` | `%APPDATA%\defrag.exe\` |
-| `macos-14` (Apple Silicon — builds Universal2 via `--target-arch universal2`) | `defrag-macos.zip` containing `DEFRAG.app` | `~/Library/Application Support/defrag.exe/` |
+| `macos-13` (Intel x86_64) | `defrag-macos-intel.zip` containing `DEFRAG.app` | `~/Library/Application Support/defrag.exe/` |
+| `macos-14` (Apple Silicon arm64) | `defrag-macos-arm64.zip` containing `DEFRAG.app` | `~/Library/Application Support/defrag.exe/` |
 | `ubuntu-22.04` (x64) | `defrag-linux-x64.tar.gz` containing `defrag-linux-x64` executable | `$XDG_DATA_HOME/defrag.exe/` or `~/.local/share/defrag.exe/` |
 
 **Why ubuntu-22.04 and not -latest:** GLIBC compatibility. Binaries built on newer Ubuntu fail on older distros because they dynamically link against a newer `libc`. 22.04 (GLIBC 2.35) is a good compatibility floor that still covers Fedora 36+, Debian 12+, Arch, recent Mint, etc.
 
-**Why macos-14 not macos-latest:** macos-14 is the Apple Silicon runner. Building on ARM and producing a Universal2 binary catches both architectures in one artifact. If `--target-arch universal2` proves unreliable (some wheels lack arm64), we fall back to two separate jobs: `macos-13` (Intel) and `macos-14` (ARM), shipping two artifacts.
+**Why two Mac jobs and not Universal2:** pygame wheels on PyPI are arch-specific (`macosx_11_0_arm64` and `macosx_10_9_x86_64` — not fat binaries). PyInstaller's `target_arch='universal2'` requires every bundled `.so` to contain both architectures and errors out when it sees a thin pygame wheel. The clean fix is two artifacts: `macos-13` runner builds the Intel zip, `macos-14` runner builds the Apple Silicon zip. Users pick the one matching their Mac.
 
 ---
 
